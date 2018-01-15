@@ -8,6 +8,9 @@ import (
 
 func main() {
 	r := gin.Default()
+	r.Static("/js", "./public/js")
+	r.Static("/css", "./public/css")
+	r.Static("/images", "./public/images")
 	r.LoadHTMLGlob("view/*")
 
 	r.GET("/", func(c *gin.Context) {
