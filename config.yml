@@ -2,7 +2,7 @@ version: 2
 jobs:
 
   test:
-    working_directory: ~/HEW2018
+    working_directory: ~/konojunya.com
     docker:
       - image: circleci/node:8.1.4
 
@@ -23,7 +23,7 @@ jobs:
             - node_modules
 
   deploy:
-    working_directory: ~/HEW2018
+    working_directory: ~/konojunya.com
     docker:
       - image: beevelop/nodejs-python
 
@@ -53,9 +53,9 @@ workflows:
   test_and_deploy:
     jobs:
       - test
-      # - deploy:
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only: master
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
