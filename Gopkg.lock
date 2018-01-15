@@ -1,0 +1,44 @@
+memo = "1979c4fe1789b938e02b663795bd4f545988597d8f5d4e4702449da2c0684bd0"
+
+[[projects]]
+  name = "github.com/gin-gonic/gin"
+  packages = [".","binding","render"]
+  revision = "3c3526f1f1935955a3e54fd2c0d8468802ee502e"
+
+[[projects]]
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  revision = "0fd8c908d872c921af513ef5091964bbd2e0d904"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jinzhu/gorm"
+  packages = ["."]
+  revision = "c3bb6aaa828867eec72dd8571d111e442688f85f"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jinzhu/inflection"
+  packages = ["."]
+  revision = "1c35d901db3da928c72a72d8458480cc9ade058f"
+
+[[projects]]
+  name = "github.com/manucorporat/sse"
+  packages = ["."]
+  revision = "ee05b128a739a0fb76c7ebd3ae4810c1de808d6d"
+
+[[projects]]
+  name = "golang.org/x/net"
+  packages = ["context"]
+  revision = "1c05540f6879653db88113bc4a2b70aec4bd491f"
+
+[[projects]]
+  name = "gopkg.in/go-playground/validator.v8"
+  packages = ["."]
+  revision = "014792cf3e266caff1e916876be12282b33059e0"
+  version = "v8.17.1"
+
+[[projects]]
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "53feefa2559fb8dfa8d81baad31be332c97d6c77"
