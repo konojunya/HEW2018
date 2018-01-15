@@ -1,0 +1,20 @@
+{
+  "name": "HEW2018",
+  "version": "1.0.0",
+  "description": "HEW2018のプロジェクト",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konojunya/HEW2018.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/konojunya/HEW2018/issues"
+  },
+  "homepage": "https://github.com/konojunya/HEW2018#readme"
+}
