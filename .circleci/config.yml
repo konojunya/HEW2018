@@ -34,7 +34,7 @@ jobs:
             - build
       - run:
           name: aws login
-          command: make aws/credentials
+          command: make aws/login
       - run:
           name: docker build
           command: make docker/build
