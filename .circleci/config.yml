@@ -2,7 +2,7 @@ version: 2
 jobs:
 
   test:
-    working_directory: ~/HEW2018
+    working_directory: ~/hew
     docker:
       - image: makki0205/deploy
 
@@ -23,7 +23,7 @@ jobs:
             - .
 
   deploy:
-    working_directory: ~/HEW2018
+    working_directory: ~/hew
     docker:
       - image: makki0205/deploy
 
