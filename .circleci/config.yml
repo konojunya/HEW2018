@@ -11,16 +11,16 @@ jobs:
       - run:
           name: npm install
           command: npm install
-    #   - run:
-    #       name: lint
-    #       command: npm run lint
-    #   - run:
-    #       name: test
-    #       command: npm test
+      - run:
+          name: component build
+          command: npm run build
+      - run:
+          name: go build
+          command: make deploy/build
       - save_cache:
-          key: node-{{ epoch }}
+          key: build-{{ epoch }}
           paths:
-            - node_modules
+            - .
 
   deploy:
     working_directory: ~/HEW2018
@@ -31,19 +31,16 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - node
-      - run:
-          name: npm install
-          command: npm install
-      - run:
-          name: build
-          command: npm run build
-      - run:
-          name: aws cli install
-          command: pip install awscli
+            - build
       - run:
           name: aws login
           command: make aws/credentials
+      - run:
+          name: docker build
+          command: make docker/build
+      - run:
+          name: dokcer push
+          command: make docker/push
       - run:
           name: deploy
           command: make aws/deploy
@@ -53,9 +50,9 @@ workflows:
   test_and_deploy:
     jobs:
       - test
-      # - deploy:
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only: master
+      - deploy:
+            requires:
+                - test
+                filters:
+                    branches:
+                        only: master
