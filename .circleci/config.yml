@@ -2,7 +2,7 @@ version: 2
 jobs:
 
   test:
-    working_directory: ~/hew
+    working_directory: /go/src/github.com/konojunya/HEW2018
     docker:
       - image: makki0205/deploy
 
@@ -23,7 +23,7 @@ jobs:
             - .
 
   deploy:
-    working_directory: ~/hew
+    working_directory: /go/src/github.com/konojunya/HEW2018
     docker:
       - image: makki0205/deploy
 
