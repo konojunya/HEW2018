@@ -4,7 +4,7 @@ jobs:
   test:
     working_directory: /go/src/github.com/konojunya/HEW2018
     docker:
-      - image: konojunya/rose
+      - image: makki0205/deploy
 
     steps:
       - checkout
@@ -25,7 +25,7 @@ jobs:
   deploy:
     working_directory: /go/src/github.com/konojunya/HEW2018
     docker:
-      - image: konojunya/rose
+      - image: makki0205/deploy
 
     steps:
       - checkout
