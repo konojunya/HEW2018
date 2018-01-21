@@ -7,4 +7,4 @@ ADD ./view ./view
 
 EXPOSE 8000
 
-ENTRYPOINT ["./main"]
+CMD ["./main"]

@@ -16,7 +16,7 @@ jobs:
           command: npm run build
       - run:
           name: go build
-          command: make deploy/build
+          command: make go/build
       - save_cache:
           key: build-{{ epoch }}
           paths:
@@ -35,26 +35,23 @@ jobs:
           keys:
             - build
       - run:
-          name: aws login
-          command: make aws/login
+          name: docker login
+          command: make docker/login
       - run:
           name: docker build
           command: make docker/build
       - run:
-          name: dokcer push
+          name: docker push
           command: make docker/push
-      - run:
-          name: deploy
-          command: make aws/deploy
 
 workflows:
   version: 2
   test_and_deploy:
     jobs:
       - test
-      # - deploy:
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only: master
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master

@@ -1,8 +1,11 @@
 package main
 
-import "github.com/konojunya/HEW2018/router"
+import (
+	"github.com/konojunya/HEW2018/router"
+	"os"
+)
 
 func main() {
 	r := router.GetRouter()
-	r.Run(":8000")
+	r.Run(":" + os.Getenv("PORT"))
 }
