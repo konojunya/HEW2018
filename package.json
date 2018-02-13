@@ -20,6 +20,7 @@
   "homepage": "https://github.com/konojunya/HEW2018#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "buefy": "^0.6.3",
     "vue": "^2.5.13"
   },
   "devDependencies": {

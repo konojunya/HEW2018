@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/konojunya/HEW2018/router"
 	"os"
+
+	"github.com/konojunya/HEW2018/router"
 )
 
 func main() {
