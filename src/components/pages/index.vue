@@ -6,18 +6,22 @@
 
 <script>
 import card from '../modules/card.vue'
+import axios from 'axios'
 
 export default {
   name: "index",
   components: {
     card
   },
+  data() {
+    return {
+      items: []
+    }
+  },
   created() {
-    this.items = [
-      { id: 1, title: "Dinner Match", thumbnail: "/image/presen-board.png" },
-      { id: 2, title: "Dinner Match", thumbnail: "/image/presen-board.png" },
-      { id: 3, title: "Dinner Match", thumbnail: "/image/presen-board.png" }
-    ]
+    axios.get("/api/products").then((res) => {
+      this.items = res.data
+    })
   }
 }
 </script>

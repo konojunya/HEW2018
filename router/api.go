@@ -1,17 +1,10 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/konojunya/HEW2018/controller"
 )
 
 func apiRouter(api *gin.RouterGroup) {
-
-	api.GET("/some", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"name": "hoge",
-		})
-	})
-
+	api.GET("/products", controller.GetProducts)
 }
