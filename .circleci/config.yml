@@ -1,7 +1,7 @@
 version: 2
 jobs:
 
-  npm:
+  test:
     working_directory: /go/src/github.com/konojunya/HEW2018
     docker:
       - image: makki0205/deploy
@@ -19,7 +19,7 @@ jobs:
           paths:
             - .
   
-  golang:
+  gotest:
     working_directory: /go/src/github.com/konojunya/HEW2018
     docker:
       - image: makki0205/deploy
@@ -62,8 +62,8 @@ workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - npm
-      - golang
+      - test
+      - gotest
       - deploy:
           requires:
             - test
