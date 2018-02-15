@@ -7,6 +7,3 @@ HEW2018のプロジェクト
 1. `npm run build:watch`
 2. `go run main.go`
 
-## Deploy
-
-1. `make build`
