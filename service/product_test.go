@@ -6,11 +6,7 @@ import (
 )
 
 func TestToken(t *testing.T) {
-	token, err := getToken()
-	if err != nil {
-		t.Fatal(err)
-	}
-	fmt.Println(token)
+	fmt.Println(auth)
 }
 func TestPost(t *testing.T) {
 	for _, product := range getProductsData() {

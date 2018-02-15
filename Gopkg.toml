@@ -54,3 +54,7 @@
 [[dependencies]]
   branch = "master"
   name = "github.com/jinzhu/gorm"
+
+[[constraint]]
+  name = "github.com/joho/godotenv"
+  version = "1.2.0"

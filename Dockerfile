@@ -7,4 +7,6 @@ ADD ./view ./view
 
 EXPOSE 8000
 
+ENV MODE production
+
 CMD ["./main"]

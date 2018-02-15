@@ -3,6 +3,9 @@ APP_NAME := hew2018
 PLATFORM := web
 DOCKER_IMAGE := $(HOST)/$(APP_NAME)/$(PLATFORM)
 
+server:
+	env PORT=3000 go run main.go
+
 migrate:
 	go run cmd/migration.go
 

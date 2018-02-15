@@ -22,9 +22,6 @@ export default {
   created() {
     axios.get("/api/products").then((res) => {
       this.isLoading = false
-      res.data.map((item) => {
-        console.log(item)
-      })
       this.items = res.data
     })
   }
