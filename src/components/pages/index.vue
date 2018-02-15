@@ -32,8 +32,11 @@ export default {
 </script>
 
 <style lang="css">
+body, html {
+  background-color: #fafafa;
+}
 section {
-  height: 100vh;
+  height: 95vh;
   margin: 0 20px;
   display: flex;
   justify-content: flex-start;
