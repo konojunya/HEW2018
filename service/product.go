@@ -11,17 +11,18 @@ import (
 var (
 	endpoint string
 	auth     string
+	path     string
 	client   firebase.Client
 )
 
 func init() {
 	endpoint = "https://hew2018-9ab24.firebaseio.com"
-	// auth, err := getToken()
-	// if err != nil {
-	// 	panic(err)
-	// }
-	auth = "GzdLzRm6vSSSaC6oZ0s7VyjrbvesN48tvvMd7TqN"
-	client = firebase.NewClient(endpoint+"/products", auth, nil)
+	auth, err := getToken()
+	if err != nil {
+		panic(err)
+	}
+	path = "/products"
+	client = firebase.NewClient(endpoint+path, auth, nil)
 }
 
 func getToken() (string, error) {
@@ -83,12 +84,10 @@ func DeleteAllProduct() error {
 	return nil
 }
 
-func PostProduct() error {
-	for _, product := range getProductsData() {
-		_, err := client.Push(product, nil)
-		if err != nil {
-			return err
-		}
+func PostProduct(product *model.Product) error {
+	_, err := client.Push(product, nil)
+	if err != nil {
+		return err
 	}
 	return nil
 }

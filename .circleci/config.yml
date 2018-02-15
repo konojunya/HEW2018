@@ -1,7 +1,7 @@
 version: 2
 jobs:
 
-  test:
+  npm:
     working_directory: /go/src/github.com/konojunya/HEW2018
     docker:
       - image: makki0205/deploy
@@ -14,16 +14,24 @@ jobs:
       - run:
           name: component build
           command: npm run build
-      - run:
-          name: get products test
-          command: go test -v ./service/...
-      - run:
-          name: go build
-          command: make go/build
       - save_cache:
           key: build-{{ epoch }}
           paths:
             - .
+  
+  golang:
+    working_directory: /go/src/github.com/konojunya/HEW2018
+    docker:
+      - image: makki0205/deploy
+
+    steps:
+      - checkout
+      - run:
+          name: go test
+          command: go test -v ./service/...
+      - run:
+          name: go build
+          command: make go/build
 
   deploy:
     working_directory: /go/src/github.com/konojunya/HEW2018
@@ -38,6 +46,9 @@ jobs:
           keys:
             - build
       - run:
+          name: migration
+          command: make migrate
+      - run:
           name: docker login
           command: make docker/login
       - run:
@@ -51,7 +62,8 @@ workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - test
+      - npm
+      - golang
       - deploy:
           requires:
             - test

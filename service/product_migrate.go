@@ -2,7 +2,7 @@ package service
 
 import "github.com/konojunya/HEW2018/model"
 
-func getProductsData() []model.Product {
+func GetProductsData() []model.Product {
 	var products []model.Product
 
 	products = append(products, model.Product{

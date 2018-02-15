@@ -7,8 +7,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	err = service.PostProduct()
-	if err != nil {
-		panic(err)
+	for _, product := range service.GetProductsData() {
+		err = service.PostProduct(&product)
+		if err != nil {
+			panic(err)
+		}
 	}
 }
