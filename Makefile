@@ -3,6 +3,9 @@ APP_NAME := hew2018
 PLATFORM := web
 DOCKER_IMAGE := $(HOST)/$(APP_NAME)/$(PLATFORM)
 
+migrate:
+	go run cmd/migration.go
+
 go/build:
 	env GOOS=linux env GOARCH=amd64 env CGO_ENABLED=0 go build -o ./cmd/main main.go
 

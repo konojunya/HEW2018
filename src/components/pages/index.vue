@@ -33,9 +33,11 @@ export default {
 
 <style lang="css">
 section {
+  height: 100vh;
+  margin: 0 20px;
   display: flex;
-  padding: 5px 20px;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: scroll;
 }
 </style>
