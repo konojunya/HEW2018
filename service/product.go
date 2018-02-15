@@ -16,10 +16,11 @@ var (
 
 func init() {
 	endpoint = "https://hew2018-9ab24.firebaseio.com"
-	auth, err := getToken()
-	if err != nil {
-		panic(err)
-	}
+	// auth, err := getToken()
+	// if err != nil {
+	// 	panic(err)
+	// }
+	auth = "GzdLzRm6vSSSaC6oZ0s7VyjrbvesN48tvvMd7TqN"
 	client = firebase.NewClient(endpoint+"/products", auth, nil)
 }
 
