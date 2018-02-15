@@ -32,10 +32,15 @@ export default {
 </script>
 
 <style lang="css">
+body, html {
+  background-color: #fafafa;
+}
 section {
+  height: 95vh;
+  margin: 0 20px;
   display: flex;
-  padding: 5px 20px;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: scroll;
 }
 </style>

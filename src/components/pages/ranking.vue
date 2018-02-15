@@ -1,8 +1,6 @@
 <template>
   <section class="container">
-    <div v-for="item in items">
-      <ranking-item></ranking-item>
-    </div>
+    <ranking-item :item="item" :key="item.id" :index="index" :max="max" v-for="(item, index) in items"></ranking-item>
     <b-loading :active.sync="isLoading"></b-loading>
   </section>
 </template>
@@ -18,13 +16,14 @@ export default {
   data() {
     return {
       items: [],
+      max: 0,
       isLoading: true
     }
   },
   created() {
     axios.get("/api/products").then((res) => {
       this.isLoading = false
-      this.items = this.rankingSort(res.data)
+      this.items = this.rankingSort(res.data).slice(0, 5)
     })
   },
   methods: {
@@ -32,8 +31,18 @@ export default {
       return items.sort((a, b) => {
         let x = a["votes"]
         let y = b["votes"]
-        if(x > y) return -1
-        if(x < y) return 1
+        if(x > y) {
+          if(this.max < x) {
+            this.max = x
+          }
+          return -1
+        }
+        if(x < y) {
+          if(this.max < y) {
+            this.max = y
+          }
+          return 1
+        }
         return 0
       })
     }
@@ -42,8 +51,15 @@ export default {
 </script>
 
 <style lang="scss">
+body, html {
+  background-color: #1A237E;
+}
 .container {
   width: 80%;
-  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>

@@ -60,6 +60,7 @@ func IncrementVote(id int) error {
 				ID:        product.ID,
 				Thumbnail: product.Thumbnail,
 				Title:     product.Title,
+				Author:    product.Author,
 				Votes:     product.Votes + 1,
 			}, nil)
 			if err != nil {
@@ -68,5 +69,25 @@ func IncrementVote(id int) error {
 		}
 	}
 
+	return nil
+}
+
+func DeleteAllProduct() error {
+	for n := range client.Iterator(productAlloc) {
+		err := client.Remove(n.Key, nil)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func PostProduct() error {
+	for _, product := range getProductsData() {
+		_, err := client.Push(product, nil)
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }
