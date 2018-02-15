@@ -1,12 +1,11 @@
 package service
 
 import (
-	"fmt"
-	"os"
+	"io/ioutil"
 
 	"github.com/JustinTulloss/firebase"
-	"github.com/joho/godotenv"
 	"github.com/konojunya/HEW2018/model"
+	yaml "gopkg.in/yaml.v2"
 )
 
 var (
@@ -25,19 +24,18 @@ func init() {
 }
 
 func getToken() (string, error) {
-	mode := os.Getenv("MODE")
-	var token string
-
-	if mode != "production" {
-		if err := godotenv.Load(); err != nil {
-			panic(err)
-		}
+	buf, err := ioutil.ReadFile("config.yml")
+	if err != nil {
+		return "", err
 	}
 
-	if token = os.Getenv("FIREBASE_TOKEN"); len(token) == 0 {
-		return "", fmt.Errorf("Error: %s", "token length zero.")
+	var config model.Config
+	err = yaml.Unmarshal(buf, &config)
+	if err != nil {
+		return "", err
 	}
-	return token, nil
+
+	return config.Token, nil
 }
 
 func productAlloc() interface{} {

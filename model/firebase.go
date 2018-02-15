@@ -1,5 +1,5 @@
 package model
 
 type Config struct {
-	Token string `yaml:"token"`
+	Token string `yaml:"FIREBASE_TOKEN"`
 }
