@@ -8,5 +8,6 @@ ADD ./view ./view
 EXPOSE 8000
 
 ENV MODE production
+ENV FIREBASE_TOKEN $FIREBASE_TOKEN
 
 CMD ["./main"]
