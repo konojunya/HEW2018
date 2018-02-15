@@ -1,6 +1,7 @@
 <template>
   <section>
-    <card v-for="item in items" :key="item.id" :thumbnail="item.thumbnail" :title="item.title" />
+    <card v-for="item in items" :key="item.id" :item="item"/>
+    <b-loading :active.sync="isLoading"></b-loading>
   </section>
 </template>
 
@@ -9,17 +10,21 @@ import card from '../modules/card.vue'
 import axios from 'axios'
 
 export default {
-  name: "index",
   components: {
     card
   },
   data() {
     return {
-      items: []
+      items: [],
+      isLoading: true
     }
   },
   created() {
     axios.get("/api/products").then((res) => {
+      this.isLoading = false
+      res.data.map((item) => {
+        console.log(item)
+      })
       this.items = res.data
     })
   }
@@ -27,16 +32,6 @@ export default {
 </script>
 
 <style lang="css">
-body, html {
-  width: 100%;
-  height: 100%;
-  background-color: #fafafa;
-}
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 section {
   display: flex;
   padding: 5px 20px;

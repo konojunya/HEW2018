@@ -3,8 +3,6 @@ package service
 import (
 	"fmt"
 	"testing"
-
-	"github.com/konojunya/HEW2018/model"
 )
 
 func TestToken(t *testing.T) {
@@ -15,15 +13,11 @@ func TestToken(t *testing.T) {
 	fmt.Println(token)
 }
 func TestPost(t *testing.T) {
-	product := &model.Product{
-		ID:        1,
-		Thumbnail: "/image/presen-board.png",
-		Title:     "Dinner Match",
-	}
-
-	_, err := client.Push(product, nil)
-	if err != nil {
-		t.Fatal(err)
+	for _, product := range getProductsData() {
+		_, err := client.Push(product, nil)
+		if err != nil {
+			t.Fatal(err)
+		}
 	}
 }
 

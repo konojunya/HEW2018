@@ -7,4 +7,5 @@ import (
 
 func apiRouter(api *gin.RouterGroup) {
 	api.GET("/products", controller.GetProducts)
+	api.POST("/products/:id/vote", controller.IncrementVote)
 }

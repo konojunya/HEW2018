@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-image">
       <figure class="img">
-        <img :src="thumbnail" alt="thumbnail">
+        <img :src="item.thumbnail" alt="thumbnail">
       </figure>
     </div>
     <button class="button is-primary" @click="vote">投票する</button>
@@ -10,13 +10,17 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  props: ["thumbnail", "title"],
+  props: ["item"],
   methods: {
     vote() {
-      this.$toast.open({
-        message: `『${this.title}』に投票しました！`,
-        type: 'is-success'
+      axios.post(`/api/products/${this.item.id}/vote`).then((res) => {
+        this.$toast.open({
+          message: `『${this.item.title}』に投票しました！`,
+          type: 'is-success'
+        })
       })
     }
   }

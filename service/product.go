@@ -51,3 +51,22 @@ func GetProducts() ([]model.Product, error) {
 
 	return products, nil
 }
+
+func IncrementVote(id int) error {
+	for n := range client.Iterator(productAlloc) {
+		product := n.Value.(*model.Product)
+		if product.ID == id {
+			err := client.Update(n.Key, &model.Product{
+				ID:        product.ID,
+				Thumbnail: product.Thumbnail,
+				Title:     product.Title,
+				Votes:     product.Votes + 1,
+			}, nil)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
+}
