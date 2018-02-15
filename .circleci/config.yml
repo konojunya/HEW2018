@@ -15,6 +15,9 @@ jobs:
           name: component build
           command: npm run build
       - run:
+          name: get products test
+          command: go test -v ./service/...
+      - run:
           name: go build
           command: make go/build
       - save_cache:

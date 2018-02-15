@@ -23,7 +23,9 @@ export default {
   created() {
     axios.get("/api/products").then((res) => {
       this.isLoading = false
-      this.items = this.rankingSort(res.data).slice(0, 5)
+      if(res.data){
+        this.items = this.rankingSort(res.data).slice(0, 5)
+      }
     })
   },
   methods: {
