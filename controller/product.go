@@ -18,10 +18,14 @@ func GetAllProducts(c *gin.Context) {
 	c.JSON(http.StatusOK, products)
 }
 
-// IncrementVote 投票する
-func IncrementVote(c *gin.Context) {
-	id := c.Param("id")
-	err := service.IncrementVote(id)
+// CreateVote 投票する
+func CreateVote(c *gin.Context) {
+	id, err := GetUint(c, "id")
+	if err != nil {
+		log.Println(err)
+		c.AbortWithStatus(http.StatusInternalServerError)
+	}
+	err = service.CreateVote(id)
 	if err != nil {
 		log.Println(err)
 		c.AbortWithStatus(http.StatusInternalServerError)

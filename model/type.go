@@ -18,5 +18,16 @@ type Product struct {
 	Thumbnail string `json:"thumbnail"`
 	Title     string `json:"title"`
 	Author    string `json:"author"`
-	Votes     int    `json:"votes"`
+	Votes     int    `json:"votes" gorm:"-"`
+}
+
+type Vote struct {
+	Model
+	ProductID uint
+}
+
+func (p *Product) SetVote() {
+	var votes []Vote
+	db.Where("product_id = ?", p.ID).Find(&votes)
+	p.Votes = len(votes)
 }

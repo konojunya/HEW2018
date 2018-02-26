@@ -7,5 +7,5 @@ import (
 
 func apiRouter(api *gin.RouterGroup) {
 	api.GET("/products", controller.GetAllProducts)
-	api.POST("/products/:id/vote", controller.IncrementVote)
+	api.POST("/products/:id/vote", controller.CreateVote)
 }
