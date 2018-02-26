@@ -39,7 +39,7 @@ jobs:
           command: make -f .circleci/ci.mk login
       - run:
           name: docker push
-          command: make -f .circleci/ci.mk docker.push
+          command: make -f .circleci/ci.mk docker/push
       - run:
           name: deploy
           command: make -f .circleci/ci.mk docker/deploy TIMESTAMP=(date +'%s')
