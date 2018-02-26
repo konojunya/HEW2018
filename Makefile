@@ -1,19 +1,22 @@
-HOST := registry.heroku.com
-APP_NAME := hew2018
-PLATFORM := web
-DOCKER_IMAGE := $(HOST)/$(APP_NAME)/$(PLATFORM)
-
+create:
+	cp config.yml.template config.yml
+	
 migrate:
-	go run cmd/migration.go
+	go run cmd/migrate.go
 
-go/build:
-	env GOOS=linux env GOARCH=amd64 env CGO_ENABLED=0 go build -o ./cmd/main main.go
-
-docker/login:
-	docker login -u $(DOCKER_USER) -p $(DOCKER_PASS) $(HOST)
+run:
+	env DB_SOURCE=production go run main.go
 
 docker/build:
-	docker build -t $(DOCKER_IMAGE) .
+	make -f .circleci/ci.mk go/build
+	make -f .circleci/ci.mk docker/build
+
+docker/run:
+	docker run -it --rm 241556795328.dkr.ecr.ap-northeast-1.amazonaws.com/lavender
 
 docker/push:
-	docker push $(DOCKER_IMAGE)
+	env NODE_ENV=production npm run build
+	make -f .circleci/ci.mk go/build
+	make -f .circleci/ci.mk docker/build
+	make -f .circleci/ci.mk login
+	make -f .circleci/ci.mk docker/push

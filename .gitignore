@@ -12,7 +12,7 @@
 
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
-### https://raw.github.com/github/gitignore/35c010258fc790ad769033e9ccfb1021178f2925/node.gitignore
+### https://raw.github.com/github/gitignore/35c010258fc790ad769033e9ccfb1021178f2925/Node.gitignore
 
 # Logs
 logs
@@ -104,4 +104,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-cmd/main
+#### 追加ignore
+main
+index.bundle.js.map
+index.bundle.js
+config.yml
+
+vendor/

@@ -3,24 +3,6 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/JustinTulloss/firebase"
-  packages = ["."]
-  revision = "da65bf12d9019bd021f4583130e3bd2ca1416434"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/ancientlore/go-avltree"
-  packages = ["."]
-  revision = "4ba4b949e04ae520ba87de82bb82d8f3a6be7e11"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/facebookgo/httpcontrol"
-  packages = ["."]
-  revision = "ccde4420e1fee9af5da365cb76075b95683f39a6"
-
-[[projects]]
-  branch = "master"
   name = "github.com/gin-contrib/sse"
   packages = ["."]
   revision = "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae"
@@ -36,16 +18,34 @@
   version = "v1.2"
 
 [[projects]]
+  name = "github.com/go-sql-driver/mysql"
+  packages = ["."]
+  revision = "a0583e0143b1624142adab07e0e97fe106d99561"
+  version = "v1.3"
+
+[[projects]]
   name = "github.com/golang/protobuf"
   packages = ["proto"]
   revision = "925541529c1fa6821df4e44ce2723319eb2be768"
   version = "v1.0.0"
 
 [[projects]]
-  name = "github.com/joho/godotenv"
+  name = "github.com/jinzhu/gorm"
   packages = ["."]
-  revision = "a79fa1e548e2c689c241d10173efd51e5d689d5b"
-  version = "v1.2.0"
+  revision = "5174cc5c242a728b435ea2be8a2f7f998e15429b"
+  version = "v1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jinzhu/inflection"
+  packages = ["."]
+  revision = "1c35d901db3da928c72a72d8458480cc9ade058f"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/makki0205/config"
+  packages = ["."]
+  revision = "1367db2194cab6668d1e4244eb345e126e5122ee"
 
 [[projects]]
   name = "github.com/mattn/go-isatty"
@@ -63,7 +63,7 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "37707fdb30a5b38865cfb95e5aab41707daec7fd"
+  revision = "f6cff0780e542efa0c8e864dc8fa522808f6a598"
 
 [[projects]]
   name = "gopkg.in/go-playground/validator.v8"
@@ -72,14 +72,14 @@
   version = "v8.18.2"
 
 [[projects]]
-  branch = "v2"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
-  revision = "d670f9405373e636a5a2765eea47fac0c9bc91a4"
+  revision = "7f97868eec74b32b0982dd158a51a446d1da7eb5"
+  version = "v2.1.1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b3eb40a10f59f963955f0e7c6bb4405e84384c186885fb65eb5e90d8ee9c293d"
+  inputs-digest = "0d515f9f0115b9336e14667a966036dd133daf92f14c102b007882c4cacab188"
   solver-name = "gps-cdcl"
   solver-version = 1

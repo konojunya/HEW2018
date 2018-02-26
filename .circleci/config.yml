@@ -2,68 +2,53 @@ version: 2
 jobs:
 
   test:
-    working_directory: /go/src/github.com/konojunya/HEW2018
+    working_directory: /go/src/github.com/makki0205/vue-go
     docker:
       - image: makki0205/deploy
-
     steps:
       - checkout
       - run:
-          name: npm install
-          command: npm install
+         name: npm install
+         command: npm install
       - run:
           name: component build
-          command: npm run build
+          command: env NODE_ENV=production npm run build
+      - run:
+          name: go build
+          command: make -f .circleci/ci.mk go/build
       - save_cache:
           key: build-{{ epoch }}
           paths:
             - .
-  
-  gotest:
-    working_directory: /go/src/github.com/konojunya/HEW2018
-    docker:
-      - image: makki0205/deploy
-
-    steps:
-      - checkout
-      - run:
-          name: go test
-          command: go test -v ./service/...
-      - run:
-          name: go build
-          command: make go/build
 
   deploy:
-    working_directory: /go/src/github.com/konojunya/HEW2018
+    working_directory: /go/src/github.com/makki0205/vue-go
     docker:
       - image: makki0205/deploy
-
     steps:
-      - checkout
       - setup_remote_docker:
           reusable: true
       - restore_cache:
           keys:
             - build
       - run:
-          name: migration
-          command: make migrate
-      - run:
-          name: docker login
-          command: make docker/login
-      - run:
           name: docker build
-          command: make docker/build
-      - run:
-          name: docker push
-          command: make docker/push
+          command: make -f .circleci/ci.mk docker/build
+#      - run:
+#          name: aws login
+#          command: make -f .circleci/ci.mk login
+#      - run:
+#          name: docker push
+#          command: make -f .circleci/ci.mk docker/push
+#      - run:
+#          name: deploy
+#          command: make -f .circleci/ci.mk docker/deploy TIMESTAMP=(date +'%s')
 
 workflows:
   version: 2
-  test_and_deploy:
+  build_and_deploy:
     jobs:
       - test
-      - gotest
       - deploy:
           requires:
             - test
