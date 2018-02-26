@@ -9,14 +9,12 @@ RUN set -x \
   && apk del tzdata \
   && rm -rf /var/cache/apk/*
 
-
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 
 ADD ./cmd/main .
 ADD ./public ./public
 ADD ./view ./view
-ADD ./dbconfig.yml ./dbconfig.yml
-
+ADD ./config.yml ./config.yml
 
 EXPOSE 8000
 
