@@ -5,6 +5,11 @@ import "github.com/konojunya/HEW2018/model"
 // GetAll プロダクト一覧とエラーを返す
 func GetAll() ([]model.Product, error) {
 	products := make([]model.Product, 0)
+	err := db.Find(&products).Error
+	if err != nil {
+		return nil, err
+	}
+
 	return products, nil
 }
 

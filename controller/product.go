@@ -8,9 +8,9 @@ import (
 	"github.com/konojunya/HEW2018/service"
 )
 
-// GetProducts プロダクト一覧を返す
-func GetProducts(c *gin.Context) {
-	products, err := service.GetProducts()
+// GetAllProducts プロダクト一覧を返す
+func GetAllProducts(c *gin.Context) {
+	products, err := service.GetAll()
 	if err != nil {
 		log.Println(err)
 		c.AbortWithStatus(http.StatusInternalServerError)
