@@ -1,28 +1,25 @@
-PROJECT-ID := deploy-test-191702
-REGION := us-central1-a
-APP := main
-DOCKER_IMAGE := gcr.io/$(PROJECT-ID)/$(APP)
+ECS_ID := 871669327434
+AWS_REGION := us-east-1
+APP := hew2018
+export AWS_REGION
+export AWS_DEFAULT_REGION=$(AWS_REGION)
+DOCKER_IMAGE    := $(ECS_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(APP):latest
 
 login:
-	gcloud config set project $(PROJECT-ID)
-	gcloud config set compute/zone $(REGION)
+	aws configure set region $(AWS_REGION)
+	aws configure set aws_access_key_id $$AWS_ACCESS_KEY_ID
+	aws configure set aws_secret_access_key $$AWS_SECRET_ACCESS_KEY
+	$$(aws ecr get-login --no-include-email --registry-ids $(ECS_ID) --region $(AWS_REGION))
 
 go/build:
 	make create
 	env GOOS=linux env GOARCH=amd64 env CGO_ENABLED=0 go build -o ./cmd/main main.go
 
 docker/build:
-	docker build -t $(DOCKER_IMAGE) .
+	docker build -t $(DOCKER_IMAGE) --build-arg GO_ENV=production .
+
+docker/push:
+	docker push $(DOCKER_IMAGE)
 
 docker/deploy:
-	docker tag $(DOCKER_IMAGE) $(DOCKER_IMAGE):$(TIMESTAMP)
-	gcloud docker -- push $(DOCKER_IMAGE):$(TIMESTAMP)
-	kubectl set image deployment/$(APP) $(APP)=$(DOCKER_IMAGE):$(TIMESTAMP)
-
-init:
-	#gcloud container clusters create $(APP)-cluster --machine-type f1-micro --disk-size=30 --num-nodes=3
-	gcloud container clusters resize $(APP)-cluster --size=1 -q
-
-first:
-	kubectl run $(APP) --image=$(DOCKER_IMAGE) --replicas=2 --port=8000
-	kubectl expose deployment $(APP) --type=LoadBalancer --port 80 --target-port 8000
+	.circleci/ecs-deploy --enable-rollback --timeout 300 --cluster $(APP) --service-name $(APP) --image $(DOCKER_IMAGE)
