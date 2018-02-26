@@ -2,7 +2,7 @@ version: 2
 jobs:
 
   test:
-    working_directory: /go/src/github.com/makki0205/vue-go
+    working_directory: /go/src/github.com/konojunya/hew2018
     docker:
       - image: makki0205/deploy
     steps:
@@ -20,9 +20,9 @@ jobs:
           key: build-{{ epoch }}
           paths:
             - .
-
+  
   deploy:
-    working_directory: /go/src/github.com/makki0205/vue-go
+    working_directory: /go/src/github.com/konojunya/hew2018
     docker:
       - image: makki0205/deploy
     steps:
@@ -34,15 +34,15 @@ jobs:
       - run:
           name: docker build
           command: make -f .circleci/ci.mk docker/build
-     - run:
-         name: aws login
-         command: make -f .circleci/ci.mk login
-     - run:
-         name: docker push
-         command: make -f .circleci/ci.mk docker/push
-     - run:
-         name: deploy
-         command: make -f .circleci/ci.mk docker/deploy TIMESTAMP=(date +'%s')
+      - run:
+          name: aws login
+          command: make -f .circleci/ci.mk login
+      - run:
+          name: docker push
+          command: make -f .circleci/ci.mk docker.push
+      - run:
+          name: deploy
+          command: make -f .circleci/ci.mk docker/deploy TIMESTAMP=(date +'%s')
 
 workflows:
   version: 2
