@@ -3,6 +3,14 @@ APP_NAME := hew2018
 PLATFORM := web
 DOCKER_IMAGE := $(HOST)/$(APP_NAME)/$(PLATFORM)
 
+local/start:
+	make migrate
+	make go/build
+	npm install
+	npm run build
+	docker build -t hew2018 -f dev.dockerfile .
+	docker run -p 8000:8000 hew2018
+
 migrate:
 	go run cmd/migration.go
 

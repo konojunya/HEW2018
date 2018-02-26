@@ -1,11 +1,13 @@
 package service
 
 import (
-	"io/ioutil"
+	"fmt"
+	"os"
+
+	"github.com/joho/godotenv"
 
 	"github.com/JustinTulloss/firebase"
 	"github.com/konojunya/HEW2018/model"
-	yaml "gopkg.in/yaml.v2"
 )
 
 var (
@@ -20,30 +22,27 @@ func init() {
 	auth, err := getToken()
 	if err != nil {
 		panic(err)
+	} else if auth == "" {
+		panic("token can not load.")
 	}
 	path = "/products"
 	client = firebase.NewClient(endpoint+path, auth, nil)
 }
 
 func getToken() (string, error) {
-	buf, err := ioutil.ReadFile("config.yml")
+	err := godotenv.Load()
 	if err != nil {
 		return "", err
 	}
 
-	var config model.Config
-	err = yaml.Unmarshal(buf, &config)
-	if err != nil {
-		return "", err
-	}
-
-	return config.Token, nil
+	return os.Getenv("FIREBASE_TOKEN"), nil
 }
 
 func productAlloc() interface{} {
 	return &model.Product{}
 }
 
+// GetProducts プロダクト一覧を取得する
 func GetProducts() ([]model.Product, error) {
 	var products []model.Product
 
@@ -51,9 +50,12 @@ func GetProducts() ([]model.Product, error) {
 		products = append(products, *n.Value.(*model.Product))
 	}
 
+	fmt.Println(products)
+
 	return products, nil
 }
 
+// IncrementVote 投票数をインクリメントする
 func IncrementVote(id int) error {
 	for n := range client.Iterator(productAlloc) {
 		product := n.Value.(*model.Product)
@@ -74,6 +76,7 @@ func IncrementVote(id int) error {
 	return nil
 }
 
+// DeleteAllProduct プロダクトをすべて削除する
 func DeleteAllProduct() error {
 	for n := range client.Iterator(productAlloc) {
 		err := client.Remove(n.Key, nil)
@@ -84,6 +87,7 @@ func DeleteAllProduct() error {
 	return nil
 }
 
+// PostProduct プロダクトを追加する
 func PostProduct(product *model.Product) error {
 	_, err := client.Push(product, nil)
 	if err != nil {

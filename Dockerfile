@@ -2,7 +2,7 @@ FROM alpine:3.6
 WORKDIR /root
 
 ADD ./cmd/main .
-ADD ./config.yml .
+ADD ./.env .
 ADD ./public ./public
 ADD ./view ./view
 

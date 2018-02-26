@@ -2,6 +2,7 @@ package service
 
 import "github.com/konojunya/HEW2018/model"
 
+// GetProductsData プロダクトデータの一覧を取得する
 func GetProductsData() []model.Product {
 	var products []model.Product
 
