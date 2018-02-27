@@ -21,11 +21,13 @@ type Product struct {
 	Votes     int    `json:"votes" gorm:"-"`
 }
 
+// Vote 投票数
 type Vote struct {
 	Model
 	ProductID uint
 }
 
+// SetVote 投票をカウントして入れる
 func (p *Product) SetVote() {
 	var votes []Vote
 	db.Where("product_id = ?", p.ID).Find(&votes)
