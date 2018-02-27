@@ -1,23 +1,13 @@
 package service
 
 import (
+	"github.com/konojunya/HEW2018/cache"
 	"github.com/konojunya/HEW2018/model"
 )
 
 // GetAll プロダクト一覧とエラーを返す
 func GetAll() ([]model.Product, error) {
-	products := make([]model.Product, 0)
-	err := db.Find(&products).Error
-	for key, product := range products {
-		product.SetVote()
-		products[key] = product
-	}
-
-	if err != nil {
-		return nil, err
-	}
-
-	return products, nil
+	return cache.Product.GetAll()
 }
 
 // CreateVote 投票する
@@ -28,6 +18,8 @@ func CreateVote(id uint) error {
 	if err != nil {
 		return err
 	}
+
+	go cache.Product.Reload()
 
 	return nil
 }
