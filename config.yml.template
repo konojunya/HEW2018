@@ -10,5 +10,5 @@ staging:
 
 production:
   dialect: mysql
-  datasource: root:password@tcp(hew2018.c8skulhrrgxj.us-east-1.rds.amazonaws.com:3301)/hew2018?parseTime=true&collation=utf8_general_ci&interpolateParams=true&loc=Local
+  datasource: root:password@tcp(hew2018.c29tebmuht2j.us-west-2.rds.amazonaws.com:3306)/hew2018?parseTime=true&collation=utf8_general_ci&interpolateParams=true&loc=Local
   dir: migration
