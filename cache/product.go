@@ -2,7 +2,6 @@ package cache
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"time"
 
@@ -31,7 +30,7 @@ func (p *productCache) Reload() {
 }
 
 func (p *productCache) load() {
-	log.Println("db access!")
+	log.Printf("\n\nDB Access!\n\n")
 	products := make([]model.Product, 0)
 	err := db.Find(&products).Error
 	if err != nil {
@@ -44,7 +43,6 @@ func (p *productCache) load() {
 	}
 
 	p.cache.Set("products", products, gocache.NoExpiration)
-	fmt.Println(products)
 }
 
 func (p *productCache) GetAll() ([]model.Product, error) {
