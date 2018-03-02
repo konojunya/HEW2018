@@ -1,5 +1,5 @@
 ECS_ID := 871669327434
-AWS_REGION := us-west-2
+AWS_REGION := ap-northeast-1
 APP := hew2018
 export AWS_REGION
 export AWS_DEFAULT_REGION=$(AWS_REGION)
