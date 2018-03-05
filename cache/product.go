@@ -24,6 +24,7 @@ func newProductCache() productCache {
 	return c
 }
 
+// Reload キャッシュの再ロード
 func (p *productCache) Reload() {
 	p.load()
 }
@@ -43,6 +44,7 @@ func (p *productCache) load() {
 	p.cache.Set("products", products, gocache.NoExpiration)
 }
 
+// GetAll 全てのproductをキャッシュから取得する
 func (p *productCache) GetAll() ([]model.Product, error) {
 	products, found := p.cache.Get("products")
 	if found {
