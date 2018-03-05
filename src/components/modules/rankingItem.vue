@@ -22,7 +22,6 @@ export default {
     }
   },
   created() {
-    console.log(this.item)
     const width = this.item.votes / parseInt(this.max) * 100
     this.style.width = `${width}%`
     this.style.backgroundColor = bgColor[this.index]
