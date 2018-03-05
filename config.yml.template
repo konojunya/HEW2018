@@ -1,4 +1,4 @@
-develop:
+development:
   dialect: mysql
   datasource: root:password@tcp(127.0.0.1:3306)/hew2018?parseTime=true&collation=utf8_general_ci&interpolateParams=true&loc=Local
   dir: migration

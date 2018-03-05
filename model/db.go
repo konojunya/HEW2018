@@ -14,14 +14,7 @@ func NewDBConn() *gorm.DB {
 		panic(err)
 	}
 
-	autoMigrate(db)
-
 	return db
-}
-
-func autoMigrate(db *gorm.DB) {
-	db.AutoMigrate(&Product{})
-	db.AutoMigrate(&Vote{})
 }
 
 func GetDBConn() *gorm.DB {

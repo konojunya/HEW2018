@@ -30,7 +30,7 @@ func getYaml() map[interface{}]interface{} {
 func getGoEnv() string {
 	_goEnv := os.Getenv("GO_ENV")
 	if _goEnv == "" {
-		return "develop"
+		return "development"
 	}
 	return _goEnv
 }

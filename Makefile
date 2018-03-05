@@ -1,11 +1,14 @@
 create:
 	cp config.yml.template config.yml
 	
-migrate:
-	go run cmd/migrate/main.go
+migrate/up:
+	sql-migrate up -config=config.yml
 
-seed:
-	go run cmd/seed/main.go
+migrate/down:
+	sql-migrate down -config=config.yml
+
+seed: migrate/up
+	go run cmd/seed.go
 
 run:
 	env DB_SOURCE=production go run main.go
