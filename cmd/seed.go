@@ -9,6 +9,11 @@ import (
 
 func main() {
 	create(model.Product{
+		Title:  "HEW投票システム",
+		Author: "konojunya",
+		Votes:  0,
+	})
+	create(model.Product{
 		Title:     "Review Lot",
 		Author:    "石田 一馬",
 		Votes:     0,

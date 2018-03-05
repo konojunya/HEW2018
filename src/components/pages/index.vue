@@ -1,6 +1,8 @@
 <template>
   <section>
-    <card v-for="item in items" :key="item.id" :item="item"/>
+    <div class="wrapper">
+      <card v-for="item in items" :key="item.id" :item="item" :confirm="confirm"/>
+    </div>
     <b-loading :active.sync="isLoading"></b-loading>
   </section>
 </template>
@@ -16,14 +18,45 @@ export default {
   data() {
     return {
       items: [],
-      isLoading: true
+      isLoading: true,
+      myId: 0,
+      count: 0,
+      canVote: true
     }
   },
   created() {
     axios.get("/api/products").then((res) => {
       this.isLoading = false
-      this.items = res.data
+
+      let items = []
+      for(let item of res.data) {
+        if(item.author == "konojunya") {
+          this.myId = item.id
+        } else {
+          items.push(item)
+        }
+      }
+      this.items = items
     })
+  },
+  methods: {
+    confirm() {
+      this.$dialog.confirm({
+        title: 'HEW投票システム',
+        message: 'HEW投票システムが気に入りましたか？よければ投票してください！',
+        cancelText: 'やめておく',
+        confirmText: 'いいと思う！',
+        onConfirm: () => this.vote()
+      })
+    },
+    vote() {
+      axios.post(`/api/products/${this.myId}/vote`).then((res) => {
+        this.$toast.open({
+          message: "ありがとうございます！",
+          type: 'is-danger'
+        })
+      })
+    }
   }
 }
 </script>
@@ -32,7 +65,7 @@ export default {
 body, html {
   background-color: #fafafa;
 }
-section {
+.wrapper {
   height: 95vh;
   margin: 0 20px;
   display: flex;

@@ -5,7 +5,7 @@
         <img :src="item.thumbnail" alt="thumbnail">
       </figure>
     </div>
-    <button class="button" @click="vote" :disabled="!canVote">いいかも！</button>
+    <button class="button" @click="vote" :disabled="!$parent.canVote">いいかも！</button>
   </div>
 </template>
 
@@ -13,22 +13,30 @@
 import axios from 'axios'
 
 export default {
-  props: ["item"],
+  props: ["item","confirm"],
   data() {
     return {
-      canVote: true
+      count: 0
     }
   },
   methods: {
     vote() {
-      if(!this.canVote) { return }
-      this.canVote = false
+      // 連打できないようにする
+      if(!this.$parent.canVote) return
+
+      this.$parent.canVote = false
       axios.post(`/api/products/${this.item.id}/vote`).then((res) => {
-        this.canVote = true
+        this.$parent.count++
         this.$toast.open({
           message: `『${this.item.title}』に投票しました！`,
           type: 'is-success'
         })
+        setTimeout(() => {
+          this.$parent.canVote = true
+          if(this.$parent.count !== 0 && this.$parent.count % 5 === 0) {
+            this.confirm()
+          }
+        }, 1500)
       })
     }
   }

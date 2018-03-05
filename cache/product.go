@@ -2,7 +2,6 @@ package cache
 
 import (
 	"errors"
-	"log"
 	"time"
 
 	"github.com/konojunya/HEW2018/model"
@@ -30,16 +29,15 @@ func (p *productCache) Reload() {
 }
 
 func (p *productCache) load() {
-	log.Printf("\n\nDB Access!\n\n")
 	products := make([]model.Product, 0)
 	err := db.Find(&products).Error
 	if err != nil {
 		panic(err)
 	}
 
-	for key, product := range products {
+	for i, product := range products {
 		product.SetVote()
-		products[key] = product
+		products[i] = product
 	}
 
 	p.cache.Set("products", products, gocache.NoExpiration)
