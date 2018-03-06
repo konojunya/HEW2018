@@ -15,8 +15,8 @@ login:
 go/build:
 	make create
 	env GOOS=linux env GOARCH=amd64 env CGO_ENABLED=0 go build -o ./cmd/main main.go
-	env GOOS=linux env GOARCH=amd64 env CGO_ENABLED=0 go build -o ./cmd/migrate-seed/migrate migration/main.go
-	env GOOS=linux env GOARCH=amd64 env CGO_ENABLED=0 go build -o ./cmd/migrate-seed/seed seed/main.go
+	env GOOS=linux env GOARCH=amd64 env CGO_ENABLED=0 go build -o ./cmd/migrate migration/main.go
+	env GOOS=linux env GOARCH=amd64 env CGO_ENABLED=0 go build -o ./cmd/seed seed/main.go
 
 docker/build:
 	docker build -t $(DOCKER_IMAGE) --build-arg GO_ENV=production .

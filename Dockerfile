@@ -15,6 +15,8 @@ ADD ./cmd/main .
 ADD ./public ./public
 ADD ./view ./view
 ADD ./config.yml ./config.yml
+ADD ./cmd/migrate .
+ADD ./cmd/seed .
 
 EXPOSE 8000
 
