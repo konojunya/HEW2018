@@ -1,3 +1,5 @@
 .circleci/* linguist-vendored
 vendor/* linguist-vendored
 public/js/bundle.js linguist-vendored
+*.html linguist-vendored
+*.js linguist-vendored
