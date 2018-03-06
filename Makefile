@@ -1,28 +1,29 @@
 create:
 	cp config.yml.template config.yml
 	
-migrate/up:
-	sql-migrate up -config=config.yml
+migrate:
+	go run migration/main.go
 
-migrate/down:
-	sql-migrate down -config=config.yml
+seed: migrate
+	go run seed/main.go
 
-seed: migrate/up
-	go run cmd/seed.go
-
-run:
-	env DB_SOURCE=production go run main.go
-
-docker/build:
+go/build:
 	make -f .circleci/ci.mk go/build
+
+docker/build: go/build
 	make -f .circleci/ci.mk docker/build
 
-docker/run:
-	docker run -it --rm 241556795328.dkr.ecr.ap-northeast-1.amazonaws.com/lavender
-
-docker/push:
+docker/push: go/build
 	env NODE_ENV=production npm run build
-	make -f .circleci/ci.mk go/build
 	make -f .circleci/ci.mk docker/build
 	make -f .circleci/ci.mk login
 	make -f .circleci/ci.mk docker/push
+
+docker/seed/build:
+	make -f .circleci/ci.mk docker/seed/build
+
+docker/seed/push:
+	make -f .circleci/ci.mk docker/seed/push
+
+docker/seed/deploy:
+	make -f .circleci/ci.mk docker/seed/deploy
