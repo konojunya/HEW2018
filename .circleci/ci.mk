@@ -6,9 +6,6 @@ export AWS_REGION
 export AWS_DEFAULT_REGION=$(AWS_REGION)
 DOCKER_IMAGE    := $(ECS_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(APP):latest
 
-# ECS migrate and seed
-SEED_DOCKER_IMAGE := := $(ECS_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/seed:latest
-
 login:
 	aws configure set region $(AWS_REGION)
 	aws configure set aws_access_key_id $$AWS_ACCESS_KEY_ID
@@ -29,13 +26,3 @@ docker/push:
 
 docker/deploy:
 	.circleci/ecs-deploy --enable-rollback --timeout 300 --cluster $(APP) --service-name $(APP) --image $(DOCKER_IMAGE)
-
-# migrate and seed task
-docker/seed/build:
-	docker build -t $(SEED_DOCKER_IMAGE) --build-arg GO_ENV=production ./cmd/migrate-seed
-
-docker/seed/push:
-	docker push $(SEED_DOCKER_IMAGE)
-
-docker/seed/deploy:
-	.circleci/ecs-deploy --enable-rollback --timeout 300 --cluster $(APP) --service-name sed --image $(SEED_DOCKER_IMAGE)

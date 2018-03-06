@@ -18,12 +18,3 @@ docker/push: go/build
 	make -f .circleci/ci.mk docker/build
 	make -f .circleci/ci.mk login
 	make -f .circleci/ci.mk docker/push
-
-docker/seed/build:
-	make -f .circleci/ci.mk docker/seed/build
-
-docker/seed/push:
-	make -f .circleci/ci.mk docker/seed/push
-
-docker/seed/deploy:
-	make -f .circleci/ci.mk docker/seed/deploy

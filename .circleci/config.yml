@@ -20,30 +20,7 @@ jobs:
           key: build-{{ epoch }}
           paths:
             - .
-  
-  seed:
-    working_directory: /go/src/github.com/konojunya/HEW2018
-    docker:
-      - image: makki0205/deploy
-    steps:
-      - setup_remote_docker:
-          reusable: true
-      - run:
-          name: go build
-          command: make -f .circleci/ci.mk go/build
-      - run:
-          name: docker build
-          command: make -f .circleci/ci.mk docker/seed/build
-      - run:
-          name: aws login
-          command: make -f .circleci/ci.mk login
-      - run:
-          name: docker push
-          command: make -f .circleci/ci.mk docker/seed/push
-      - run:
-          name: deploy
-          command: make -f .circleci/ci.mk docker/seed/deploy
-  
+    
   deploy:
     working_directory: /go/src/github.com/konojunya/HEW2018
     docker:
@@ -72,11 +49,6 @@ workflows:
   build_and_deploy:
     jobs:
       - test
-      - seed:
-          filters:
-            branches:
-              only: seed
-
       - deploy:
           requires:
             - test
