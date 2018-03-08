@@ -3,9 +3,12 @@
     <div class="ranking">
       <router-link class="ranking-text" to="/">一覧に戻る</router-link>
     </div>
-    <div class="wrapper">
+    <div class="wrapper" v-if="items.length >= 1">
       <ranking-item :item="item" :key="item.id" :index="index" :max="max" v-for="(item, index) in items"></ranking-item>
       <b-loading :active.sync="isLoading"></b-loading>
+    </div>
+    <div class="noresult" v-else>
+      <h1>まだランキングが集計できません。</h1>
     </div>
   </section>
 </template>
@@ -26,33 +29,17 @@ export default {
     }
   },
   created() {
-    axios.get("/api/products").then((res) => {
+    axios.get("/api/ranking").then((res) => {
       this.isLoading = false
-      if(res.data){
-        this.items = this.rankingSort(res.data).slice(0, 5)
+      if(res.data) {
+        for(let item of res.data) {
+          if(item.votes > this.max) {
+            this.max = item.votes
+          }
+        }
+        this.items = res.data
       }
     })
-  },
-  methods: {
-    rankingSort(items) {
-      return items.sort((a, b) => {
-        let x = a["votes"]
-        let y = b["votes"]
-        if(x > y) {
-          if(this.max < x) {
-            this.max = x
-          }
-          return -1
-        }
-        if(x < y) {
-          if(this.max < y) {
-            this.max = y
-          }
-          return 1
-        }
-        return 0
-      })
-    }
   }
 }
 </script>
@@ -83,6 +70,13 @@ section {
     color: #FFF;
     font-weight: 600;
     text-decoration: none;
+  }
+}
+.noresult {
+  h1 {
+    color: white;
+    text-align: center;
+    font-weight: 600;
   }
 }
 @media (max-width: 640px) {

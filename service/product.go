@@ -6,15 +6,8 @@ import (
 )
 
 // GetAll プロダクト一覧とエラーを返す
-func GetAll() ([]model.Product, error) {
+func GetAll() (model.Products, error) {
 	return cache.Product.GetAll()
-}
-
-// GetByID idを元にproductを返す
-func GetByID(id uint) (*model.Product, error) {
-	product := &model.Product{}
-	err := db.First(&product, id).Error
-	return product, err
 }
 
 // CreateVote 投票する

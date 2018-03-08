@@ -19,19 +19,14 @@ func GetAllProducts(c *gin.Context) {
 	c.JSON(http.StatusOK, products)
 }
 
-// GetProductByID idからproductを返す
-func GetProductByID(c *gin.Context) {
-	id, err := GetUint(c, "id")
-	if err != nil {
-		log.Println(err)
-		c.AbortWithStatus(http.StatusBadRequest)
-	}
-	product, err := service.GetByID(id)
+// GetRankedProducts ランキングを返す
+func GetRankedProducts(c *gin.Context) {
+	products, err := service.GetAll()
 	if err != nil {
 		log.Println(err)
 		c.AbortWithStatus(http.StatusInternalServerError)
 	}
-	c.JSON(http.StatusOK, product)
+	c.JSON(http.StatusOK, products.RankingSort().FilterZero().Cut(5))
 }
 
 // CreateVote 投票する

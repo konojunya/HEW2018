@@ -30,7 +30,7 @@ func (p *productCache) Reload() {
 }
 
 func (p *productCache) load() {
-	products := make([]model.Product, 0)
+	products := make(model.Products, 0)
 	err := db.Find(&products).Error
 	if err != nil {
 		panic(err)
@@ -45,10 +45,10 @@ func (p *productCache) load() {
 }
 
 // GetAll 全てのproductをキャッシュから取得する
-func (p *productCache) GetAll() ([]model.Product, error) {
+func (p *productCache) GetAll() (model.Products, error) {
 	products, found := p.cache.Get("products")
 	if found {
-		return products.([]model.Product), nil
+		return products.(model.Products), nil
 	}
 	return nil, errors.New("products not loaded")
 }
