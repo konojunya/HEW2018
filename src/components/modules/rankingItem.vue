@@ -64,4 +64,20 @@ export default {
     }
   }
 }
+@media (max-width: 640px) {
+  .wrapper {
+    height: 10vh;
+    .bg {
+      height: 10vh;
+    }
+    .content {
+      .name {
+        font-size: 16px;
+      }
+      .point {
+        font-size: 16px;
+      }
+    }
+  }
+}
 </style>

@@ -67,4 +67,18 @@ export default {
   border-radius: 5px;
   border: 0;
 }
+@media (max-width: 640px) {
+  .card {
+    max-width: 45vw;
+    min-width: 45vw;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+  .button {
+    margin: 0;
+    border-radius: 0px;
+    font-size: 12px;
+  }
+}
 </style>

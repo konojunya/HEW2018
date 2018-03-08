@@ -82,4 +82,14 @@ body, html {
   align-items: center;
   overflow-x: scroll;
 }
+@media (max-width: 640px) {
+  .wrapper {
+    height: auto;
+    margin: 5px;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-x: inherit;
+  }
+}
 </style>

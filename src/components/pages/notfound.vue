@@ -13,4 +13,9 @@ h1 {
   font-weight: 600;
   color: rgba(0,0,0,0.87);
 }
+@media (max-width: 640px) {
+  h1 {
+    font-size: 3rem;
+  }
+}
 </style>
