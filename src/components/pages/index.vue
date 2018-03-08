@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="wrapper">
-      <card v-for="item in items" :key="item.id" :item="item" />
+      <card v-for="item in items" :key="item.id" :item="item" :voteme="voteme"/>
     </div>
     <b-loading :active.sync="isLoading"></b-loading>
   </section>
@@ -46,6 +46,14 @@ export default {
         array[r] = tmp
       }
       return array
+    },
+    voteme() {
+      axios.post(`/api/products/${this.myId}`).then((res) => {
+        this.$toast.open({
+          message: `ありがとうございます！`,
+          type: 'is-success'
+        })
+      })
     }
   }
 }

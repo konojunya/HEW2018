@@ -20,7 +20,7 @@
 import axios from 'axios'
 
 export default {
-  props: ["item"],
+  props: ["item", "voteme"],
   data() {
     return {
       isImageModalActive: false
@@ -28,13 +28,36 @@ export default {
   },
   methods: {
     vote() {
-      axios.post(`/api/products/${this.item.id}/vote`).then((res) => {
-        this.$toast.open({
-          message: `『${this.item.title}』に投票しました！`,
-          type: 'is-success'
+      if(this.canVote()) {
+        axios.post(`/api/products/${this.item.id}/vote`).then((res) => {
+          this.$toast.open({
+            message: `『${this.item.title}』に投票しました！`,
+            type: 'is-success'
+          })
+          this.setLocalStorage()
+          this.isImageModalActive = false
         })
-        isImageModalActive = false
-      })
+      } else {
+        this.$dialog.confirm({
+          message: "1人、1票までしか投票できません。<br/>この作品に票をいれるともう1度、投票することができます。",
+          cancelText: 'やめておく',
+          confirmText: '投票する',
+          type: 'is-danger',
+          onConfirm: () => {
+            this.removeLocalStorage()
+            this.voteme()
+          }
+        })
+      }
+    },
+    removeLocalStorage() {
+      localStorage.removeItem("hew2018-vote")
+    },
+    setLocalStorage() {
+      localStorage.setItem("hew2018-vote", this.item.id)
+    },
+    canVote() {
+      return !localStorage.getItem("hew2018-vote")
     }
   }
 }
