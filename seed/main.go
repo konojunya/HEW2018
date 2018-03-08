@@ -10,7 +10,7 @@ import (
 func main() {
 	create(model.Product{
 		Title:  "HEW投票システム",
-		Author: "konojunya",
+		Author: "河野 純也",
 		Votes:  0,
 	})
 	create(model.Product{
@@ -25,12 +25,12 @@ func main() {
 		Votes:     0,
 		Thumbnail: "/image/02.png",
 	})
-	// create(model.Product{
-	// 	Title:     "Funny Diary",
-	// 	Author:    "大塚 翔太",
-	// 	Votes:     0,
-	// 	Thumbnail: "/image/03.png",
-	// })
+	create(model.Product{
+		Title:     "Funny Diary",
+		Author:    "大塚 翔太",
+		Votes:     0,
+		Thumbnail: "/image/03.png",
+	})
 	create(model.Product{
 		Title:     "クラブのサポート・クラボ",
 		Author:    "尾崎 由芽",
@@ -60,6 +60,18 @@ func main() {
 		Author:    "菅 優祟",
 		Votes:     0,
 		Thumbnail: "/image/10.png",
+	})
+	create(model.Product{
+		Title:     "岩瀬唯奈SITE（偽）",
+		Author:    "高鉾 大貴",
+		Votes:     0,
+		Thumbnail: "/image/11.png",
+	})
+	create(model.Product{
+		Title:     "単語帳アプリ コネクト",
+		Author:    "竹林 寛晃",
+		Votes:     0,
+		Thumbnail: "/image/12.jpg",
 	})
 	create(model.Product{
 		Title:     "L'Atelier",
@@ -96,6 +108,12 @@ func main() {
 		Author:    "森 真樹史",
 		Votes:     0,
 		Thumbnail: "/image/18.png",
+	})
+	create(model.Product{
+		Title:     "Study Node",
+		Author:    "綿野 拓也",
+		Votes:     0,
+		Thumbnail: "/image/19.jpg",
 	})
 }
 

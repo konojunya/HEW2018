@@ -14,6 +14,8 @@
 import card from '../modules/card.vue'
 import axios from 'axios'
 
+const MY_ID = 1
+
 export default {
   components: {
     card
@@ -21,8 +23,7 @@ export default {
   data() {
     return {
       items: [],
-      isLoading: true,
-      myId: 0
+      isLoading: true
     }
   },
   created() {
@@ -31,9 +32,7 @@ export default {
 
       let items = []
       for(let item of res.data) {
-        if(item.author == "konojunya") {
-          this.myId = item.id
-        } else {
+        if(item.id != MY_ID) {
           items.push(item)
         }
       }
@@ -51,7 +50,7 @@ export default {
       return array
     },
     voteme() {
-      axios.post(`/api/products/${this.myId}`).then((res) => {
+      axios.post(`/api/products/${MY_ID}vote`).then((res) => {
         this.$toast.open({
           message: `ありがとうございます！`,
           type: 'is-success'

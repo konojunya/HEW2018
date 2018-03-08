@@ -11,7 +11,7 @@ h1 {
   align-items: center;
   font-size: 5rem;
   font-weight: 600;
-  color: rgba(0,0,0,0.87);
+  color: white;
 }
 @media (max-width: 640px) {
   h1 {
