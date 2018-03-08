@@ -19,6 +19,21 @@ func GetAllProducts(c *gin.Context) {
 	c.JSON(http.StatusOK, products)
 }
 
+// GetProductByID idからproductを返す
+func GetProductByID(c *gin.Context) {
+	id, err := GetUint(c, "id")
+	if err != nil {
+		log.Println(err)
+		c.AbortWithStatus(http.StatusBadRequest)
+	}
+	product, err := service.GetByID(id)
+	if err != nil {
+		log.Println(err)
+		c.AbortWithStatus(http.StatusInternalServerError)
+	}
+	c.JSON(http.StatusOK, product)
+}
+
 // CreateVote 投票する
 func CreateVote(c *gin.Context) {
 	id, err := GetUint(c, "id")
