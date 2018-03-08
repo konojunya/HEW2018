@@ -50,7 +50,7 @@ export default {
       return array
     },
     voteme() {
-      axios.post(`/api/products/${MY_ID}vote`).then((res) => {
+      axios.post(`/api/products/${MY_ID}/vote`).then((res) => {
         this.$toast.open({
           message: `ありがとうございます！`,
           type: 'is-success'
@@ -93,7 +93,7 @@ section {
   .wrapper {
     height: auto;
     padding-bottom: 20px;
-    margin: 5px;
+    margin: 0 5px;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
