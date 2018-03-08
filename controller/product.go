@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/konojunya/HEW2018/cache"
 	"github.com/konojunya/HEW2018/service"
 )
 
@@ -31,4 +32,9 @@ func CreateVote(c *gin.Context) {
 		c.AbortWithStatus(http.StatusInternalServerError)
 	}
 	c.AbortWithStatus(http.StatusNoContent)
+}
+
+// RefreshCache キャッシュをリフレッシュ
+func RefreshCache(c *gin.Context) {
+	cache.RefreshAll()
 }

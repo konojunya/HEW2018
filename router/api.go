@@ -8,4 +8,5 @@ import (
 func apiRouter(api *gin.RouterGroup) {
 	api.GET("/products", controller.GetAllProducts)
 	api.POST("/products/:id/vote", controller.CreateVote)
+	api.POST("/refresh", controller.RefreshCache)
 }
