@@ -49,8 +49,8 @@ func (p *Products) FilterZero() *Products {
 	return &products
 }
 
-// RankingSort ランキングしたProductsを返す
-func (p *Products) RankingSort() *Products {
+// SortByVote ランキングしたProductsを返す
+func (p *Products) SortByVote() *Products {
 	sort.Slice(*p, func(i, j int) bool {
 		return (*p)[i].Votes > (*p)[j].Votes
 	})

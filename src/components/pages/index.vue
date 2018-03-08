@@ -4,7 +4,7 @@
       <router-link class="ranking-text" to="/ranking">ランキングをみてみる</router-link>
     </div>
     <div class="wrapper">
-      <card v-for="item in items" :key="item.id" :item="item" :voteme="voteme"/>
+      <card v-for="item in items" :key="item.id" :item="item" :voteme="voteme" />
     </div>
     <b-loading :active.sync="isLoading"></b-loading>
   </section>

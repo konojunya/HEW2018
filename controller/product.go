@@ -26,7 +26,7 @@ func GetRankedProducts(c *gin.Context) {
 		log.Println(err)
 		c.AbortWithStatus(http.StatusInternalServerError)
 	}
-	c.JSON(http.StatusOK, products.RankingSort().FilterZero().Cut(5))
+	c.JSON(http.StatusOK, products.SortByVote().FilterZero().Cut(5))
 }
 
 // CreateVote 投票する
