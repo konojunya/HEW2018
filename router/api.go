@@ -10,4 +10,7 @@ func apiRouter(api *gin.RouterGroup) {
 	api.GET("/ranking", controller.GetRankedProducts)
 	api.POST("/products/:id/vote", controller.CreateVote)
 	api.POST("/refresh", controller.RefreshCache)
+
+	// for miyauchi
+	api.GET("/miyauchi", controller.GetRankingForMiyauchi)
 }

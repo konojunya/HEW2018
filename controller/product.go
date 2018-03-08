@@ -29,6 +29,16 @@ func GetRankedProducts(c *gin.Context) {
 	c.JSON(http.StatusOK, products.SortByVote().FilterZero().Cut(5))
 }
 
+// GetRankingForMiyauchi 宮内先生に見せるためのデータをとってくるAPI
+func GetRankingForMiyauchi(c *gin.Context) {
+	products, err := service.GetAll()
+	if err != nil {
+		log.Println(err)
+		c.AbortWithStatus(http.StatusInternalServerError)
+	}
+	c.JSON(http.StatusOK, products.SortByVote())
+}
+
 // CreateVote 投票する
 func CreateVote(c *gin.Context) {
 	id, err := GetUint(c, "id")

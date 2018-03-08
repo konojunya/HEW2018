@@ -9,6 +9,7 @@ Vue.use(Buefy)
 // components
 import Index from './components/pages/index.vue'
 import Ranking from './components/pages/ranking.vue'
+import Miyauchi from './components/pages/miyauchi.vue'
 import NotFound from './components/pages/notfound.vue'
 
 const router = new VueRouter({
@@ -16,6 +17,7 @@ const router = new VueRouter({
   routes: [
     { path: "/", component: Index },
     { path: "/ranking", component: Ranking },
+    { path: "/miyauchi", component: Miyauchi },
     { path: "*", component: NotFound },
   ]
 })
