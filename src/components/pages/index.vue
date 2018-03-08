@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="wrapper">
-      <card v-for="item in items" :key="item.id" :item="item" :confirm="confirm"/>
+      <card v-for="item in items" :key="item.id" :item="item" />
     </div>
     <b-loading :active.sync="isLoading"></b-loading>
   </section>
@@ -19,9 +19,7 @@ export default {
     return {
       items: [],
       isLoading: true,
-      myId: 0,
-      count: 0,
-      canVote: true
+      myId: 0
     }
   },
   created() {
@@ -48,23 +46,6 @@ export default {
         array[r] = tmp
       }
       return array
-    },
-    confirm() {
-      this.$dialog.confirm({
-        title: 'HEW投票システム',
-        message: 'HEW投票システムが気に入りましたか？よければ投票してください！',
-        cancelText: 'やめておく',
-        confirmText: 'いいと思う！',
-        onConfirm: () => this.vote()
-      })
-    },
-    vote() {
-      axios.post(`/api/products/${this.myId}/vote`).then((res) => {
-        this.$toast.open({
-          message: "ありがとうございます！",
-          type: 'is-danger'
-        })
-      })
     }
   }
 }

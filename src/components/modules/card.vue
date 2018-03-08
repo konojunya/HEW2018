@@ -1,11 +1,18 @@
 <template>
   <div class="card">
-    <div class="card-image">
+    <b-modal :active.sync="isImageModalActive" :width="400" scroll="keep">
+      <p class="img">
+        <img :src="item.thumbnail">
+      </p>
+      <div class="button-wrapper">
+        <button class="button" @click="vote">いいかも！</button>
+      </div>
+    </b-modal>
+    <div class="card-image" @click="isImageModalActive = true">
       <figure class="img">
         <img :src="item.thumbnail" alt="thumbnail">
       </figure>
     </div>
-    <button class="button" @click="vote" :disabled="!$parent.canVote">いいかも！</button>
   </div>
 </template>
 
@@ -13,30 +20,20 @@
 import axios from 'axios'
 
 export default {
-  props: ["item","confirm"],
+  props: ["item"],
   data() {
     return {
-      count: 0
+      isImageModalActive: false
     }
   },
   methods: {
     vote() {
-      // 連打できないようにする
-      if(!this.$parent.canVote) return
-
-      this.$parent.canVote = false
       axios.post(`/api/products/${this.item.id}/vote`).then((res) => {
-        this.$parent.count++
         this.$toast.open({
           message: `『${this.item.title}』に投票しました！`,
           type: 'is-success'
         })
-        setTimeout(() => {
-          this.$parent.canVote = true
-          if(this.$parent.count !== 0 && this.$parent.count % 5 === 0) {
-            this.confirm()
-          }
-        }, 1500)
+        isImageModalActive = false
       })
     }
   }
@@ -59,13 +56,17 @@ export default {
     width: 100%;
   }
 }
-.button {
-  margin: 5px 10px 5px auto;
-  background-color: #EF5350;
-  color: white;
-  font-weight: 600;
-  border-radius: 5px;
-  border: 0;
+.button-wrapper {
+  background-color: #fff;
+  .button {
+    display: block;
+    width: 100%;
+    background-color: #EF5350;
+    color: white;
+    font-weight: 600;
+    border-radius: 0px;
+    border: 0;
+  }
 }
 @media (max-width: 640px) {
   .card {
@@ -76,8 +77,6 @@ export default {
     flex-direction: column;
   }
   .button {
-    margin: 0;
-    border-radius: 0px;
     font-size: 12px;
   }
 }
