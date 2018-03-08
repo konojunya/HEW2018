@@ -1,5 +1,8 @@
 <template>
   <section>
+    <div class="ranking">
+      <router-link class="ranking-text" to="/ranking">ランキングをみてみる</router-link>
+    </div>
     <div class="wrapper">
       <card v-for="item in items" :key="item.id" :item="item" :voteme="voteme"/>
     </div>
@@ -59,21 +62,38 @@ export default {
 }
 </script>
 
-<style lang="css">
-body, html {
-  background-color: #fafafa;
+<style lang="scss">
+section {
+  padding-top: 2rem;
 }
 .wrapper {
-  height: 95vh;
+  height: 80vh;
   margin: 0 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   overflow-x: scroll;
 }
+.ranking {
+  width: 250px;
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  background-color: rgb(210, 12, 84);
+  border-top-right-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  border: 1px solid #FFF;
+  border-left-width: 0;
+  .ranking-text {
+    color: #FFF;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
 @media (max-width: 640px) {
   .wrapper {
     height: auto;
+    padding-bottom: 20px;
     margin: 5px;
     justify-content: space-around;
     align-items: center;

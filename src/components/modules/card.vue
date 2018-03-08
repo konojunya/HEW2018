@@ -5,7 +5,7 @@
         <img :src="item.thumbnail">
       </p>
       <div class="button-wrapper">
-        <button class="button" @click="vote">いいかも！</button>
+        <button class="button" @click="vote">投票する</button>
       </div>
     </b-modal>
     <div class="card-image" @click="isImageModalActive = true">
@@ -39,7 +39,7 @@ export default {
         })
       } else {
         this.$dialog.confirm({
-          message: "1人、1票までしか投票できません。<br/>この作品に票をいれるともう1度、投票することができます。",
+          message: "1人、1票までしか投票できません。<br/>この投票サイトにも投票するともう1度、投票することができます。",
           cancelText: 'やめておく',
           confirmText: '投票する',
           type: 'is-danger',
@@ -81,14 +81,17 @@ export default {
 }
 .button-wrapper {
   background-color: #fff;
+  padding: 5px;
   .button {
     display: block;
     width: 100%;
+    height: auto;
     background-color: #EF5350;
     color: white;
     font-weight: 600;
-    border-radius: 0px;
+    border-radius: 50px;
     border: 0;
+    padding: 10px;
   }
 }
 @media (max-width: 640px) {

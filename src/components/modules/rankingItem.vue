@@ -29,7 +29,6 @@ export default {
 }
 </script>
 
-
 <style lang="scss" scoped>
 .wrapper {
   width: 100%;

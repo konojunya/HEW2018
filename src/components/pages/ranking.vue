@@ -1,7 +1,12 @@
 <template>
-  <section class="container">
-    <ranking-item :item="item" :key="item.id" :index="index" :max="max" v-for="(item, index) in items"></ranking-item>
-    <b-loading :active.sync="isLoading"></b-loading>
+  <section>
+    <div class="ranking">
+      <router-link class="ranking-text" to="/">一覧に戻る</router-link>
+    </div>
+    <div class="wrapper">
+      <ranking-item :item="item" :key="item.id" :index="index" :max="max" v-for="(item, index) in items"></ranking-item>
+      <b-loading :active.sync="isLoading"></b-loading>
+    </div>
   </section>
 </template>
 
@@ -52,16 +57,38 @@ export default {
 }
 </script>
 
-<style lang="scss">
-body, html {
-  background-color: #1A237E;
+<style lang="scss" scoped>
+section {
+  padding-top: 2rem;
 }
-.container {
+.wrapper {
   width: 80%;
+  margin: 0 auto;
   height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+}
+.ranking {
+  width: 250px;
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  background-color: rgb(210, 12, 84);
+  border-top-right-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  border: 1px solid #FFF;
+  border-left-width: 0;
+  .ranking-text {
+    color: #FFF;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+@media (max-width: 640px) {
+  .wrapper {
+    width: 90%;
+    height: auto;
+  } 
 }
 </style>
